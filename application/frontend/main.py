@@ -9,13 +9,13 @@ st.title('Bot or Not?')
 # menampilkan form input
 with st.form(key='user_input_form'):
     # Form untuk Nama
-    name = st.text_input('Nama user', 'name')
+    name = st.text_input('Nama user', 'Name')
 
     # Form untuk Gender (pilihan antara Male atau Female)
     gender = st.selectbox('Jenis kelamin', ['Male', 'Female'])
 
     # Form untuk Email (harus menggunakan email yang valid)
-    email_id = st.text_input('Alamat email user', 'email')
+    email_id = st.text_input('Alamat email user', 'yourEmail@gmail.com')
 
     # Form untuk Google Login (True atau False)
     is_glogin = st.checkbox('Apakah akun menggunakan google login untuk register akun atau tidak', value=True)
@@ -52,34 +52,33 @@ with st.form(key='user_input_form'):
 
     if submit_button:
         # Ketika submit, siapkan data dalam format yang akan dikirim ke backend API
-              user_input = {
-            "name": name,
-            "gender": gender,
-            "email": email_id,
-            "is_glogin": is_glogin,
-            "follower_count": follower_count,
-            "following_count": following_count,
-            "dataset_count": dataset_count,
-            "code_count": code_count,
-            "discussion_count": discussion_count,
-            "avg_nb_read_time_min": avg_nb_read_time_min,
-            "total_votes_gave_nb": total_votes_gave_nb,
-            "total_votes_gave_ds": total_votes_gave_ds,
-            "total_votes_gave_dc": total_votes_gave_dc
-        
-}  ## lengkapi dengan data yang akan dikirim ke backend
+        user_input = {
+            'NAME': name,
+            'GENDER': gender,
+            'EMAIL_ID': email_id,
+            'IS_GLOGIN': is_glogin,
+            'FOLLOWER_COUNT': follower_count,
+            'FOLLOWING_COUNT': following_count,
+            'DATASET_COUNT': dataset_count,
+            'CODE_COUNT': code_count,
+            'DISCUSSION_COUNT': discussion_count,
+            'AVG_NB_READ_TIME_MIN': avg_nb_read_time_min,
+            'TOTAL_VOTES_GAVE_NB': total_votes_gave_nb,
+            'TOTAL_VOTES_GAVE_DS': total_votes_gave_ds,
+            'TOTAL_VOTES_GAVE_DC': total_votes_gave_dc
+        }  ## lengkapi dengan data yang akan dikirim ke backend
         
         # Kirim data ke backend untuk prediksi
         # Misalnya, Anda bisa menggunakan requests untuk mengirim data ke API FastAPI
-response = requests.post('http://localhost:8000/predict/', json=user_input)
+        response = requests.post('http://localhost:8000/predict/', json=user_input)
         
         # Menampilkan hasil prediksi
-if response.status_code == 200:
+        if response.status_code == 200:
             prediction = response.json().get('prediction')
             
             if prediction == 1:
                 st.write('User terdeteksi BOT.')
             else:
                 st.write('User tidak terdeteksi BOT.')
-else:
+        else:
             st.write('Terjadi kesalahan dalam prediksi.')
