@@ -52,19 +52,34 @@ with st.form(key='user_input_form'):
 
     if submit_button:
         # Ketika submit, siapkan data dalam format yang akan dikirim ke backend API
-        user_input = {...}  ## lengkapi dengan data yang akan dikirim ke backend
+              user_input = {
+            "name": name,
+            "gender": gender,
+            "email": email_id,
+            "is_glogin": is_glogin,
+            "follower_count": follower_count,
+            "following_count": following_count,
+            "dataset_count": dataset_count,
+            "code_count": code_count,
+            "discussion_count": discussion_count,
+            "avg_nb_read_time_min": avg_nb_read_time_min,
+            "total_votes_gave_nb": total_votes_gave_nb,
+            "total_votes_gave_ds": total_votes_gave_ds,
+            "total_votes_gave_dc": total_votes_gave_dc
+        
+}  ## lengkapi dengan data yang akan dikirim ke backend
         
         # Kirim data ke backend untuk prediksi
         # Misalnya, Anda bisa menggunakan requests untuk mengirim data ke API FastAPI
-        response = requests.post('http://localhost:8000/predict/', json=user_input)
+response = requests.post('http://localhost:8000/predict/', json=user_input)
         
         # Menampilkan hasil prediksi
-        if response.status_code == 200:
+if response.status_code == 200:
             prediction = response.json().get('prediction')
             
             if prediction == 1:
                 st.write('User terdeteksi BOT.')
             else:
                 st.write('User tidak terdeteksi BOT.')
-        else:
+else:
             st.write('Terjadi kesalahan dalam prediksi.')
