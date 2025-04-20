@@ -34,10 +34,10 @@ class UserInput(BaseModel):
 # ------------------------------
 # Load model & scaler
 # ------------------------------
-scaler = joblib.load('../../model/minmax_scaler.pkl')  # Path relatif dari lokasi main.py
+scaler = joblib.load('../../model/minmax_scaler.pkl')  
 model = joblib.load('../../model/ET_model.pkl')         # Model yang dilatih sebelumnya
 
-# Daftar fitur yang dibutuhkan model (harus sama seperti saat training)
+# Daftar fitur yang dibutuhkan model (sama seperti saat training)
 FEATURES_FOR_SCALER = [
     'IS_GLOGIN', 'FOLLOWER_COUNT', 'FOLLOWING_COUNT',
     'DATASET_COUNT', 'CODE_COUNT', 'DISCUSSION_COUNT',
